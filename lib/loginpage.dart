@@ -10,6 +10,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String name = "";
+  var onClick = false;
 
   Widget build(BuildContext context) {
     return Material(
@@ -26,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 16,
           ),
           Text('Mr./Ms./Mrs. $name'),
-          SizedBox(height :16),
+          SizedBox(height: 16),
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
@@ -40,8 +41,8 @@ class _LoginPageState extends State<LoginPage> {
                         OutlineInputBorder(borderSide: BorderSide(width: 2)),
                   ),
                   onChanged: (value) {
-                    name = value; 
-                    setState(() {  });
+                    name = value;
+                    setState(() {});
                   },
                 ),
                 SizedBox(height: 8),
@@ -59,22 +60,45 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
+
+          InkWell(
+            onTap: () async {
+              setState(() {
+                onClick = true;
+              });
+              await Future.delayed(Duration(milliseconds: 40));
               Navigator.pushNamed(context, MyRoutes.homeRoute);
+
             },
-            child: Text('Login'),
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 30),
+              height: 40,
+              width: 120,
+              decoration: BoxDecoration(
+                  //gradient: LinearGradient(colors: [Colors.white , Colors.deepPurple] , begin: Alignment.centerLeft , end : Alignment.centerRight),
+                  color: Colors.deepPurpleAccent,
+                 // borderRadius: BorderRadius.circular(12)
+                  shape: onClick ?  BoxShape.circle : BoxShape.rectangle
+                  ),
+              child: onClick ? Icon(Icons.done) : Text(
+                'Login ',
+                textAlign: TextAlign.center,
+              ),
+            ),
           )
+
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, MyRoutes.homeRoute);
+          //   },
+          //   child: Text('Login'),
+          // )
         ],
       ),
     )));
   }
 }
 
-//after learning about navigator and routes 
-
-//we learn about stateful wwidgets 
-//Once we convert a stateless Class to stateful Class 
-//a private class is created in the program which is our stateless class 
-//a State function converts the private class data into a StateFul class
-// '_' before an object name means it is private
+//we learn about Animated Conntainer
+//to bring delay of shifting the page after the click , we use keyword async and call await keyword
+//we will animate using onClick keyword

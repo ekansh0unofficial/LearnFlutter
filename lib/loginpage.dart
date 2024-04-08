@@ -12,6 +12,8 @@ class _LoginPageState extends State<LoginPage> {
   String name = "";
   var onClick = false;
 
+  final _formKey = GlobalKey<FormState>();
+
   Widget build(BuildContext context) {
     return Material(
         child: Center(
@@ -28,61 +30,94 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Text('Mr./Ms./Mrs. $name'),
           SizedBox(height: 16),
+
+          //form
           Padding(
             padding:
                 const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Username",
-                    label: Text('Username'),
-                    border:
-                        OutlineInputBorder(borderSide: BorderSide(width: 2)),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Enter Username",
+                      label: Text('Username'),
+                      border:
+                          OutlineInputBorder(borderSide: BorderSide(width: 2)),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return " Cannot be empty";
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      name = value;
+                      setState(() {});
+                    },
                   ),
-                  onChanged: (value) {
-                    name = value;
-                    setState(() {});
-                  },
-                ),
-                SizedBox(height: 8),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Enter Password",
-                    label: Text('Password'),
-                    border:
-                        OutlineInputBorder(borderSide: BorderSide(width: 2)),
+                  SizedBox(height: 8),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Enter Password",
+                      label: Text('Password'),
+                      border:
+                          OutlineInputBorder(borderSide: BorderSide(width: 2)),
+                    ),
+                    obscureText: true,
+                    obscuringCharacter: '*',
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return " Cannot be empty";
+                      } else if (value.length < 6) {
+                        return "Password has to be atleast 6 characters long.";
+                      }
+                      return null;
+                    },
                   ),
-                  obscureText: true,
-                  obscuringCharacter: '*',
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+
           SizedBox(height: 16),
 
-          InkWell(
-            onTap: () async {
-              setState(() {
-                onClick = true;
-              });
-              await Future.delayed(Duration(milliseconds: 40));
-              Navigator.pushNamed(context, MyRoutes.homeRoute);
-
-            },
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 30),
-              height: 40,
-              width: 120,
-              decoration: BoxDecoration(
-                  //gradient: LinearGradient(colors: [Colors.white , Colors.deepPurple] , begin: Alignment.centerLeft , end : Alignment.centerRight),
-                  color: Colors.deepPurpleAccent,
-                 // borderRadius: BorderRadius.circular(12)
-                  shape: onClick ?  BoxShape.circle : BoxShape.rectangle
-                  ),
-              child: onClick ? Icon(Icons.done) : Text(
-                'Login ',
-                textAlign: TextAlign.center,
+          //animated button
+          Material(
+            borderRadius: BorderRadius.circular(onClick ? 100 : 8),
+            color: Colors.deepPurpleAccent,
+            child: InkWell(
+              splashColor: Colors.white,
+              onTap: () async {
+                if (_formKey.currentState!.validate()) {
+                  setState(() {
+                    onClick = true;
+                  });
+                }
+                await Future.delayed(Duration(milliseconds: 500));
+                await Navigator.pushNamed(context, MyRoutes.homeRoute);
+                setState(() {
+                  onClick = false;
+                });
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 30),
+                height: 40,
+                width: onClick ? 40 : 120,
+                alignment: Alignment.center,
+                child: onClick
+                    ? Icon(
+                        Icons.done,
+                        color: Colors.white,
+                      )
+                    : Center(
+                        child: Text(
+                          'Login ',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 18),
+                        ),
+                      ),
               ),
             ),
           )
@@ -99,6 +134,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-//we learn about Animated Conntainer
-//to bring delay of shifting the page after the click , we use keyword async and call await keyword
-//we will animate using onClick keyword
+//_formkey is a key that group multiple user entries into form
+// we studyy about validators 
+// a lil trickery to sort our login page problem 

@@ -1,24 +1,30 @@
 // ignore_for_file: annotate_overrides, use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dart/models/catalog.dart';
+import 'package:flutter_dart/widgets/item_widget.dart';
 import 'package:flutter_dart/widgets/mydrawer.dart';
 
 class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title : Text("Hello World App") ,/* backgroundColor: Colors.deepPurple*/),
+      appBar: AppBar(
+        title: Text("Hello World App"), /* backgroundColor: Colors.deepPurple*/
+      ),
       drawer: MyDrawer(),
       body: Center(
           child: Container(
-            //  color: Colors.orange,
-              child:
-                  Text('Hello World', /*style: TextStyle(color: Colors.black , fontSize: 30)*/))),
+              //  color: Colors.orange,
+              child: ListView.builder(
+                  itemCount: CatalogModel.items.length,
+                  itemBuilder: (context, index) {
+                    return ItemWidget(item: CatalogModel.items[index]);
+                  }))),
     );
   }
 }
 
-
-//replaced Material with Scaffold , as it gives more organised way to place widgets on the screen 
-// it gives, Header : app bar , body , Footer : bottomsheet etc , and other component widgets 
+//listView , builder , ItemBuilder , Returns MyItemWidget
+//learning about assert (TESTING) , constructors of a class
   

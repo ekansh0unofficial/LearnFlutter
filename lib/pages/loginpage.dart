@@ -88,19 +88,21 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(onClick ? 100 : 8),
             color: Colors.deepPurpleAccent,
             child: InkWell(
-              splashColor: Colors.white,
-              onTap: () async {
-                if (_formKey.currentState!.validate()) {
-                  setState(() {
-                    onClick = true;
+                splashColor: Colors.white,
+                onTap: () async {
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      onClick = true;
+                    });
+                    await Future.delayed(Duration(milliseconds: 500));
+                    await Navigator.pushNamed(context, MyRoutes.homeRoute);
+                    setState(() {
+                    onClick = false;
                   });
-                }
-                await Future.delayed(Duration(milliseconds: 500));
-                await Navigator.pushNamed(context, MyRoutes.homeRoute);
-                setState(() {
-                  onClick = false;
-                });
-              },
+
+                  }
+
+                },  
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 30),
                 height: 40,

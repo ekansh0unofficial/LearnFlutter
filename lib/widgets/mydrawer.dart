@@ -1,6 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dart/pages/homepage.dart';
+import 'package:flutter_dart/utils/my_routes.dart';
 
 class MyDrawer extends StatelessWidget {
   final imagesource =
@@ -28,11 +30,17 @@ class MyDrawer extends StatelessWidget {
           ListTile(
               leading: Icon(Icons.home_filled),
               title: Text("Home", textScaler: TextScaler.linear(1.2),),
+              onTap: () => {
+                Navigator.pushNamed(context, MyRoutes.homeRoute)
+              },
           ),
           
           ListTile(
               leading: Icon(Icons.person),
               title: Text("Profile", textScaler: TextScaler.linear(1.2),),
+              onTap: () => {
+                Navigator.pushNamed(context, MyRoutes.homeRoute)
+              },
           ),
           
           ListTile(

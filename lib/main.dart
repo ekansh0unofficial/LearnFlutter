@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dart/pages/homepage.dart';
 import 'package:flutter_dart/pages/loginpage.dart';
+import 'package:flutter_dart/pages/profilepage.dart';
 import 'package:flutter_dart/utils/my_routes.dart';
 import 'package:flutter_dart/widgets/mytheme.dart';
+
 
 
 void main() {
@@ -21,9 +23,11 @@ class MyApp extends StatelessWidget{
       theme: MyTheme.lightTheme
      ,
     routes:{
-      MyRoutes.intialRoute: (context) => Homepage(),
+      MyRoutes.intialRoute: (context) =>ProfilePage(),
       MyRoutes.homeRoute : (context)  => Homepage(),
-      MyRoutes.loginRoute :(context) => LoginPage() 
+      MyRoutes.loginRoute :(context) => LoginPage(), 
+      MyRoutes.profileRoute :(context) => ProfilePage()
+
     }
     );
   }

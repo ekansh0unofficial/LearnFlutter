@@ -93,5 +93,6 @@ class Item {
 
 
 class CatalogModel {
+  // ignore: prefer_typing_uninitialized_variables
   static var items;
 }

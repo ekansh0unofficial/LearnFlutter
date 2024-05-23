@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget{
       theme: MyTheme.lightTheme
      ,
     routes:{
-      MyRoutes.intialRoute: (context) =>ProfilePage(),
+      MyRoutes.intialRoute: (context) =>Homepage(),
       MyRoutes.homeRoute : (context)  => Homepage(),
       MyRoutes.loginRoute :(context) => LoginPage(), 
       MyRoutes.profileRoute :(context) => ProfilePage()

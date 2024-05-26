@@ -18,7 +18,7 @@ class MyGrid extends StatelessWidget {
     return DefaultTextStyle(
       style: GoogleFonts
       .cabin(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16,  ),
-      child:InkWell(onTap: ,child:Container(
+      child:InkWell(child:Container(
         decoration: BoxDecoration(color: hexToColor(item.color) , borderRadius: BorderRadius.circular(16)) ,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

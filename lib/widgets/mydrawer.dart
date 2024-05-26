@@ -46,6 +46,7 @@ class MyDrawer extends StatelessWidget {
           ListTile(
               leading: Icon(Icons.list),
               title: Text("Catalog", textScaler: TextScaler.linear(1.2),),
+              onTap : () => Navigator.pushNamed(context , MyRoutes.catalogRoute)
           ),
         ],
       ),

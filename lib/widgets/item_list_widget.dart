@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dart/models/catalog.dart';
 
 class ItemWidget extends StatelessWidget {
+  
   final Item item;
 
   const ItemWidget({key, required this.item})
